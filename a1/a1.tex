@@ -76,6 +76,69 @@ p = \frac{{4 \choose 3} \cdot {4 \choose 1} + {4 \choose 4}}{{8 \choose 4}} = \f
 
 \section{Gift exchange problem}
 
+\subsection{Suppose there are four people at his party (including himself). In how many ways can the boxesbe distributed so that exactly one person is assigned his/her own gift?}
+Suppose we have A, B, C, D four people. We randomly choose 1 person to have his/her own gift, so \({4 \choose 1}\). 
+Without missing of generality, we look at the case where A gets his/her own gift. Then B, C, D has to work with a set that each of them does not get his/her own gift, and there are only 2 ways to do that.
+\begin{center}
+\begin{tabular}{ |c|c|c|c| } 
+ \hline
+ & B & C & D \\ 
+ \hline
+ (1) & C & D & B \\ 
+ (2) & D & B & C \\ 
+ \hline
+\end{tabular}
+\end{center}
+So in total there are \( {4 \choose 1} \cdot 2 = 8\) ways.
+
+\subsection{In how many ways can the boxes be distributed so that no one is assigned his/her own gift? Do not use explicit enumeration in this question. Instead, introduce the number of ways, \(N_i\), of having i people getting their own gift. What is \( \sum_{i=0}^{5} N_i \)?}
+
+Let \( N_i \) be having i people getting their own gift. Then \( N_0 \) means nobody gets his/her own gift, and \( N_1 \) means exactly 1 person gets his/her own gift, ..., etc. \\
+So \( \sum_{i=0}^{5} N_i \) should include all the permutations of distributing 5 gifts, so \\
+\[ \sum_{i=0}^{5} N_i = 5! \]. \\
+Let \( f(x) \) denote the case that in a total of x people, each of them not getting his/her own gift. From the previous question, we know that:\\
+\[
+\begin{array}{ll}
+f(0) = 1 ,\texttt{by default} \\
+f(1) = 0, \texttt{no chance for 1 person not getting his/her own gift} \\
+f(2) = 1, \texttt{having 2 people and each gets the other's} \\
+f(3) = 2, \texttt{from the previous question we know there are 2 ways} \\
+\end{array}
+\]
+Consider 4 people and each not getting his/her own gift, we have\\
+\[
+\begin{array}{ll}
+f(4) = 4! - {4 \choose 1} \cdot f(3) - {4 \choose 2} \cdot f(2) - {4 \choose 3} \cdot f(1) - {4 \choose 4} \cdot f(0) \\
+f(4) = 24 - 4 \times 2 - 6 \times 1 - 4 \times 0 - 1 \times 1\\
+f(4) = 9
+\end{array}
+\]
+Getting no one is assigned his/her own gift is equivalent to getting \( f(5) = N_0 = 5! - \sum_{i=1}^{5} N_i = 5! - N_1 - N_2 - N_3 - N_4 - N_5.\) \\
+\[
+\begin{array}{ll}
+f(5) = 5! - {5 \choose 1} \cdot f(5-1) - {5 \choose 2} \cdot f(5-2) - {5 \choose 3} \cdot f(5-3) - {5 \choose 4} \cdot f(5-4) - {5 \choose 5} \cdot f(5-5) \\
+f(5) = 5! - {5 \choose 1} \cdot f(4) - {5 \choose 2} \cdot f(3) - {5 \choose 3} \cdot f(2) - {5 \choose 4} \cdot f(1) - {5 \choose 5} \cdot f(0) \\
+f(5) = 120 - 5 \times 9 - 10 \times 2 - 10 \times 1 - 5 \times 0 - 1 \times 1\\
+f(5) = 44
+\end{array}
+\]
+Therefore, there are 44 ways to be distributed so that no one is assigned his/her own gift.
+
+\subsection{If the boxes are randomly distributed in a party of 5, what is the probability that no one is assignedhis/her own gift?}
+
+There are in total \( 5! \) ways of permutation, and 44 ways to satisfy the goal, so the probability is:
+\[
+p = \frac{44}{5!} = \frac{11}{30}
+\]
+
+\subsection{What is the probability that Tom ends up receiving Finn's gift, but Finn does not receive Tom's gift?}
+
+There are 1 + 5 = 6 people in total in the party, so the total number of permutations are 6! \\
+Tom gets Finn's (\textbf{1}). In the remaining 5 gifts, \textbf{4} of them are not from Tom for Finn to choose. The rest of permutations are \textbf{4!}\\
+So the probability is:
+\[
+p = \frac{1 \times 4 \times 4! }{6!} = \frac{2}{15}
+\]
 
 \section{Guessing answers on a test}
 
