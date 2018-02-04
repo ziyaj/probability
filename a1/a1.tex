@@ -40,7 +40,7 @@ p = f(x,y) = \left\{
 \subsubsection{What is the probability that there are exactly 2 billion copies immediately after nine rounds?}
 
 Each successful round the amount doubles, and each failing round the amount is cut by half. In the end, there are exactly 2 billion copies. So we have equation\\
-\[ 2^k + (1/2)^(9-k) = 2^1 \]
+\[ 2^k + (1/2)^{(9-k)} = 2^1 \]
 Solving it we get \( k = 5 \). So the probability is \\
 \[
 Pr(K = 5) = {9 \choose 5} \cdot 0.5^5 \cdot (1-0.5)^{9-5} = {9 \choose 5} \cdot 0.5^9 = 63/256 = 0.24609375
@@ -189,7 +189,7 @@ In this case, the probability is \( 0.5^2 \times Pr(X \geq 3) = \frac{219}{1024}
 In this case, Nathan has to answer all first 8 questions correctly. Therefore, the probability is \( 0.5^2 \times 0.5^8 = \frac{1}{1024}\).
 \item Nathan answers one of the last 2 questions correctly.\\
 The probability of answering one of the last 2 questions correctly is \( {2 \choose 1} \cdot 0.5^1 \cdot (1-0.5)^{(2-1)}= \frac{1}{2} \). \\
-In this case, Nathan needs \( \geq 40 \) points in the first question. In this case, Nathan needs to answer \( \geq 6 \) questions correctly in the first 8 questions. So the probability for the first 8 questions is:
+In this case, Nathan needs \( \geq 40 \) points in the first question. In this case, Nathan needs to answer \( \geq 6 \) questions correctly in the first 8 questions. Using the random variable defined in 4.2, the probability for the first 8 questions is:
 \[
 \begin{array}{ll}
 Pr(X \geq 6) = Pr(X = 6) + Pr(X = 7) + Pr(X = 8) \\
