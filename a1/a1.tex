@@ -1,0 +1,75 @@
+\documentclass{article}
+\usepackage{amssymb}
+\usepackage{amsfonts}
+\date{February 2018}
+
+\begin{document}
+
+\section{Polymerase chain reaction}
+
+\subsection{PCR}
+Let K denote the number of successes in copying DNA, then we have \( K \sim Bin(n, p), p = 0.5\)
+
+\subsubsection{what is the probability that there are exactly 8 billion copies immediately after 9 rounds?}
+
+In this particular problem, \( n = 9 \), so \( K \sim Bin(9, 0.5)\)\\
+We start from 1 billion, and each success doubles the amount of copies. In the end, there are exactly 8 billion copies. So the number of successes is \( k = {\log_2 8} = 3. \) \\
+\\
+So the probability is \\
+\[
+Pr(K = 3) = {9 \choose 3} \cdot 0.5^3 \cdot (1 - 0.5)^{(9-3)} = {9 \choose 3} \cdot (1/2)^9 = 21/128 = 0.1640625
+\]
+
+\subsubsection{Find a general formula for the probability that there are exactly x billion copies after y rounds.}
+
+The number of successes after y rounds is \( k = {\log_2 x} \). \\
+So the probability is \( Pr(K = k) = {y \choose k} \cdot 0.5^k \cdot (1 - 0.5)^{y-k} = {y \choose k} \cdot 0.5^y = 
+{y \choose {\log_2 x}} \cdot 0.5^y\) \\
+\\
+k needs to satisfy \( 0 \leq k \leq y\), so the generic formula is: \\
+\[
+p = f(x,y) = \left\{
+\begin{array}{ll}
+      {y \choose {\log_2 x}} \cdot 0.5^y & x = 2^k, 0\leq k \leq y, k \in \mathbb{N} \\
+      0 & otherwise\\
+\end{array} 
+\right.
+\]
+
+\subsection{Optional}
+\subsubsection{What is the probability that there are exactly 2 billion copies immediately after nine rounds?}
+
+Each successful round the amount doubles, and each failing round the amount is cut by half. In the end, there are exactly 2 billion copies. So we have equation\\
+\[ 2^k + (1/2)^(9-k) = 2^1 \]
+Solving it we get \( k = 5 \). So the probability is \\
+\[
+Pr(K = 5) = {9 \choose 5} \cdot 0.5^5 \cdot (1-0.5)^{9-5} = {9 \choose 5} \cdot 0.5^9 = 63/256 = 0.24609375
+\]
+
+\subsubsection{Find a general formula for the probability that there are exactly x copies after y rounds.}
+Following the same logic as in 1.2.1, we have formula: \\
+\[
+2^k \cdot (1/2)^{(y-k)} = 2^{\log_2 x}
+\]
+Solving it we get \( k = ({\log_2 x} + y)/2 \). So the probability is:\\
+\[
+Pr(K = k) = {y \choose k} \cdot 0.5^k \cdot (1 - 0.5)^{y-k} = {y \choose k} \cdot 0.5^y = 
+{y \choose ({\log_2 x} + y )/2} \cdot 0.5^y
+\]
+k needs to satisfy \( 0 \leq k \leq y , (0 \leq ({\log_2 x} + y )/2 \leq y)\), so the generic formula is:\\
+\[
+p = f(x,y) = \left\{
+\begin{array}{ll}
+      {y \choose ({\log_2 x} + y )/2} \cdot 0.5^y & x = 2^j, -y \leq j \leq y, j \in \mathbb{N} \\
+      0 & otherwise\\
+\end{array} 
+\right.
+\]
+
+\section{Hypothesis testing}
+
+\section{Gift exchange problem}
+
+\section{Guessing answers on a test}
+
+\end{document}
