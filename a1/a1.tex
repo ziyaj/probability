@@ -142,5 +142,68 @@ p = \frac{1 \times 4 \times 4! }{6!} = \frac{2}{15}
 
 \section{Guessing answers on a test}
 
+\subsection{Your strategy is to not answer false for any two consecutive questions. In how many ways can you answer all ten questions on the test?}
+
+Let \( f(n) \) be in a total of n questions, the number of ways to answer without having false for any two consecutive questions. So the question is asking for \( f(10) \). \\
+In a total of n question, if we answer TRUE for the first question, the problem is deducted to \( f(n-1) \). If we answer FALSE for the first question, then in order not to having consecutive false's, we have to answer the second question with TRUE, and the rest of the problem is deduced to \( f(n-2) \). So we have \( f(n) = f(n-1) + f(n-2), n \geq 2 \). \\
+Consider the base case when n = 1: there are 2 ways so \( f(1) = 2 \). \\
+Consider the base case when n = 2: in a total of \( 2^2 = 4 \) ways, FALSE, FALSE is the only invalid case, so \( f(2) = 4 - 1 = 3\). \\
+\( f(3) = f(2) + f(1) = 5 \) \\ 
+\( f(4) = f(3) + f(2) = 8 \) \\ 
+\( f(5) = f(4) + f(3) = 13 \) \\ 
+\( f(6) = f(5) + f(4) = 21 \) \\ 
+\( f(7) = f(6) + f(5) = 34 \) \\ 
+\( f(8) = f(7) + f(6) = 55 \) \\ 
+\( f(9) = f(8) + f(7) = 89 \) \\ 
+\( f(10) = f(9) + f(8) = 144 \) \\
+ (Or we can think that \(f(n) = fibonacci(n-2) \) but we still need to compute if there is no table to consult from)
+ Therefore, in 144 ways I can answer all ten questions on the test.
+
+\subsection{Given that Nathan is able to correctly guess the answer to the last two problems, what is the probabilitythat he passes the test?}
+
+First 8 questions has 60 points, so each question is \( 60 / 8 = 7.5 \) points. \\
+Nathan answers the last 2 questions correctly, so he gets at least 40 points for sure. \\
+In order to pass the test, Nathan needs to get \( \geq (60 - 40) \) points, and answering 3 questions correctly gets him 22.5 points. \\
+So Nathan needs to answer \( x \geq 3 \) questions correctly in the first 8 questions. \\
+Let X denote the number of questions Nathan correctly answers in the first 8 questions, we have \( X \sim Bin(8, 0.5)\).
+So the probability is:
+\[
+\begin{array}{ll}
+Pr(X \geq 3) = 1 - Pr(X \leq 2) = 1 - Pr(X=0) - Pr(X=1) - Pr(X=2) \\
+Pr(X \geq 3) = 1 - {8 \choose 0} \cdot 0.5^0 \cdot (1-0.5)^8 - {8 \choose 1} \cdot 0.5^1 \cdot (1-0.5)^{(8-1)} - {8 \choose 2} \cdot 0.5^2 \cdot (1-0.5)^{(8-2)} \\
+Pr(X \geq 3) = 1 - 0.5^8 - 8 \times 0.5^8 - 28 \times 0.5^8 \\
+Pr(X \geq 3) = \frac{219}{256} = 0.85546875
+\end{array}
+\]
+
+\subsection{Find the probability that Nathan passes the test.}
+
+We can divide it into 3 cases:
+\begin{enumerate}
+\item Nathan answers the last 2 questions correctly.\\
+In this case, the probability is \( 0.5^2 \times Pr(X \geq 3) = \frac{219}{1024} \)
+\item Nathan answers both of last 2 questions wrong.\\
+In this case, Nathan has to answer all first 8 questions correctly. Therefore, the probability is \( 0.5^2 \times 0.5^8 = \frac{1}{1024}\).
+\item Nathan answers one of the last 2 questions correctly.\\
+The probability of answering one of the last 2 questions correctly is \( {2 \choose 1} \cdot 0.5^1 \cdot (1-0.5)^{(2-1)}= \frac{1}{2} \). \\
+In this case, Nathan needs \( \geq 40 \) points in the first question. In this case, Nathan needs to answer \( \geq 6 \) questions correctly in the first 8 questions. So:
+\[
+\begin{array}{ll}
+Pr(X \geq 6) = Pr(X = 6) + Pr(X = 7) + Pr(X = 8) \\
+Pr(X \geq 6) = {8 \choose 6} \cdot 0.5^6 \cdot (1-0.5)^{(8-6)} + {8 \choose 7} \cdot 0.5^7 \cdot (1-0.5)^{(8-7)} + {8 \choose 8} \cdot 0.5^8 \cdot (1-0.5)^{(8-8)} \\
+Pr(X \geq 6) = 28 \times 0.5^8 + 8 \times 0.5^8 +  1 \times 0.5^8 \\
+Pr(X \geq 6) = 37 \times 0.5^8 \\
+Pr(X \geq 6) = \frac{37}{256} \\
+\end{array}
+\]
+So the probability for this case is \( \frac{1}{2} \times \frac{37}{256} = \frac{37}{512} \).
+\end{enumerate}
+
+
+So the total probability for Nathan to pass the exam is:
+\[
+p = Pr_{case_1} + Pr_{case_2} + Pr_{case_3} = \frac{219}{1024} + \frac{1}{1024} + \frac{37}{512} = \frac{294}{1024} = \frac{147}{512} = 0.28109375
+\]
+
 
 \end{document}
