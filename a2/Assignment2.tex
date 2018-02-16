@@ -1,0 +1,150 @@
+%Initial setup
+\documentclass[11pt]{article}
+\title{STAT 302: Assignment 2}
+\author{Ziyang Jin \\
+\# 34893140}
+\date{February 2018}
+
+%Math Packages
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amsthm}
+
+%General formatting Packages
+\usepackage{fancyhdr} %To put headers in
+\usepackage{multirow} %for tables
+\usepackage{graphicx,graphpap,rotate,geometry,subfigure} 
+\usepackage{enumitem} %Permits more customisation of lists than enumerate
+\usepackage{tikz} %for textcolor
+
+%Document Layout
+%Text positioning
+\marginparwidth 0pt %
+\marginparsep 0pt  %distance between marginal notes box and main text
+\oddsidemargin  0pt
+\evensidemargin  0pt
+\topmargin   0pt
+\textwidth   6.8in %control width of text on 8.5X11 page
+\textheight  9.50in %control height of text on 8.5X11 page
+\voffset -0.8in
+
+\newcommand{\pr}{\text{Pr}}
+\newcommand{\e}{\mathbb{E}}
+\newcommand{\var}{\text{Var}}
+\newcommand{\sd}{\text{SD}}
+
+%Header of the pages
+\pagestyle{fancy}
+\lhead{STAT 302}
+\rhead{Assignment 2}
+\setlength{\headheight}{14pt} %to make room for the header vertically due do squashed height
+\fancyhfoffset[R]{0.2in} %to stretch header to match the length of the textwidth.
+
+
+%=============================
+\begin{document}
+\maketitle
+
+\begin{enumerate}[label=\textbf{Q \arabic*:},start=1]
+
+%Question 1:
+%===================================================
+% Adrian's question
+\item Suppose that we have a bin containing 3 balls labelled 1 through 3, and a fair coin labelled 0 on one side and 1 on the other side. We draw a ball at random from the bin, observe the number $B$, put the ball back in the bin, flip the coin $B$ times, and then sum up the $B$ values of the coin. \\
+\begin{enumerate}
+\item Write down the probability mass function for completing this experiment one time.\\
+
+\item Find the expectation and the standard deviation of this random variable.\\
+
+\item Now suppose we repeat this experiment 3 times, but on the second run we flip a fair coin labelled 0 or 2, and on the third run we flip a fair coin labelled 0 or 3. What is the expectation and standard deviation of the total sum observed after completing this three part experiment?
+
+\end{enumerate}
+
+
+
+%Question 2:
+%===================================================
+% Julian's question
+\item
+Peter has prepared two types of magic coins for a show. The probability that a head is tossed for the first type of coin is 0.5 and that for the second type is 0.7. Peter accidentally mixes seven coins of the first type and three coins of the second type. 
+He then randomly picks one coin from the ten mixed coins.
+\begin{enumerate}
+  \item Peter plans to toss the chosen coin repeatedly until 3 heads are obtained.
+  \begin{enumerate}
+    \item Find the probability mass function of the number of tosses needed until 3 heads are obtained.\\
+
+
+
+    \item What is the expected number of tosses needed to obtain 3 heads? What is the variance?\\
+
+  \end{enumerate}
+
+  \item If it takes exactly 6 tosses to obtain 3 heads, what is the probability that the coin is of the first type?\\
+
+
+
+  \item Peter believes that if it takes at most 4 tosses to obtain the first head, then the coin is of the first type. What is the probability that Peter correctly identifies a randomly chosen coin from the ten mixed coins?\\
+
+\end{enumerate}
+
+
+
+\newpage
+
+%Question 3:
+%===================================================
+
+\item 
+Suppose there are two separate polling agencies interested in gauging the opinions of UBC students regarding how the current provincial goverrnment has been dealing with the proposed Kinder Morgan pipeline expansion from Edmonton to Burnaby. Both polling agencies will ask random UBC students to answer ``Yes" or ``No" to the following question: {\em I generally approve of how the current BC government is handling the proposed Kinder Morgan pipeline expansion.}
+
+\begin{enumerate}
+  \item The two agencies first run a test poll on a random sample of students from a UBC Statistics class containing 20 students. Polling agency A samples 10 students {\em without replacement} from the class to answer the question, whereas polling agency B samples 10 students {\em with replacement} from the same class. Identify the random variables, $A$ and $B$, that could model these two polling procedures and calculate $\pr(5\leq A\leq 7)$ and $\pr(5\leq B\leq 7)$. Which sampling scheme seems better and why? Suppose that 12 out of the 20 students in the class would answer ``Yes" to the polling question.\\
+
+  \item Now suppose the polling agencies are ready to sample a large proportion of UBC students on Main Mall. Assume the student population of UBC is 20,000 and that $60\%$ of the student population would answer ``Yes" to the polling question. If the two polling agencies sample 1000 student opinions using their respective sampling schemes, and we use $A$ and $B$ to denote the number of sampled students answering ``Yes" to the polling question from each agency respectively, what is $\e(A)$ and $\e(B)$?\\
+
+  \item Now find $\pr(\e(A) - 15 \leq A \leq \e(A) + 15)$ and $\pr(\e(B) - 15 \leq B \leq \e(B) + 15)$. How do the differences in these probabilities compare to the differences in the probabilities you found in part (a)? Do you still prefer one sampling scheme to the other? Why or why not?\\
+
+  \item {\em [Optional bonus question]} Show that as the population size $N$ grows, the probability mass function of a hypergeometric random variable approaches the probability mass function of a binomial random variable, assuming a constant chance of success. That is, show $$\lim_{N\rightarrow\infty} \frac { {m \choose x}{N-m \choose n-x}}{ {N\choose n}} = {n\choose x} p^x (1-p)^{n-x},$$ where $p = \frac mN$ is constant. {\em Hint:} Rewrite the choose functions in terms of factorials and remember that, as we have seen in class, the highest order terms will dominate in the limit.
+\end{enumerate}
+
+
+
+
+\vspace*{3mm}
+
+%Question 4:
+\item You are part of a field team in the Strait of Georgia tasked with surveying the nesting habits of a colony of Pelagic Cormorants ({\em Phalacrocorax pelagicus}), an iconic and precipitously declining species native to coastal British Columbia. Your supervisor wants to ensure the team is big enough to monitor all cormorant pairs in the colony at least 90\% of the time. Each member of the field team can reliably observe 5 cormorant pairs simultaneously. 
+\begin{enumerate}
+\item The expected number of cormorant pairs at the colony at any one time is known to be 20. How big should the field team be to ensure that at least 90\% of the time all pairs can be observed? 
+({\em Hint:} use R or an online applet to calculate the appropriate probabilities.)
+
+\item Due to budget considerations, your supervisor was only able to recruit 3 people for the field team (yourself and two others). Unfortunately, when you arrive at the colony of study, you find that the colony is twice the size as anticipated. with twice the average number of cormorant pairs present at any one time. What is the probability that your team of 3 can observe all the cormorant pairs at any one time? (Your supervisor is busy with other tasks so can't help with the observations....) 
+\end{enumerate}
+
+
+
+% Question 5:
+%===================================================
+
+\item Suppose the amount of energy (in kilocalories), $E$, provided by the sun to a random arbutus tree on a winter day in Victoria follows a random variable characterized by the following probability density function:
+\[
+f(x) = \left\{
+\begin{array}{ll}
+cx\sin(x) & \mbox{ if } 0\leq x\leq \pi \\
+0 & \mbox{ otherwise} 
+\end{array}
+\right.
+\]
+where $c$ is a fixed constant. 
+\begin{enumerate}
+  \item Find the value of $c$ that makes $f(x)$ an honest PDF.\\
+
+  \item Find the cumulative distribution function of $E$.\\
+
+  \item Suppose we would like to study how much energy arbutus trees around James Bay in Victoria are absorbing. We start sampling trees at random in James Bay and recording their energy intake from the sun. How likely is it that we have to sample more than 10 trees to find the first with an energy intake exceeding 3 kilocalories?
+
+
+\end{enumerate}
+
+\end{enumerate}
+\end{document}
