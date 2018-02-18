@@ -189,12 +189,47 @@ Var(X) = \mathbb{E}(X^2) - [\mathbb{E}(X)]^2 = 0.7 \times 42 + 0.3 \times \frac{
   \end{enumerate}
 
   \item If it takes exactly 6 tosses to obtain 3 heads, what is the probability that the coin is of the first type?\\
-
-
+\\
+Let Y denote the number of tosses needed to obtain 3 heads. \( Y \sim NegBin(3, p) \). \\
+Let \( X_1 \) denote the event that Peter picks the first type of coin. \(Pr(X_1) = 0.7, \  p = 0.5.\) \\
+Let \( X_2 \) denote the event that Peter picks the second type of coin. \( Pr(X_2) = 0.3, \ p = 0.7.\) \\
+\[
+Pr(Y=6 \ | X_1) = {5 \choose 2} 0.5^3 \ (1-0.5)^{6-3} = \frac{5}{32} = 0.15625
+\]
+\[
+Pr(Y=6 \ | X_2) = {5 \choose 2} 0.7^3 \ (1-0.7)^{6-3} = \frac{9261}{100000} = 0.09261
+\]
+According to the PMF obtained in (a),
+\[
+Pr(Y = 6) = 0.7 {5 \choose 2} ( 0.5^6 + 0.7^2 \cdot 0.3^4 ) = \frac{68579}{100000} = 0.137158
+\]
+The question is asking about \( Pr(X_1 \ | Y = 6) \). According to \textit{Bayes' Theorem}:
+\[
+Pr(X_1 \ | Y = 6) = \frac{Pr(Y = 6 \  | X_1) Pr(X_1)}{Pr(Y = 6)} = \frac{0.15625 \times 0.7}{0.137158} = \frac{109375}{137158} = 0.797438
+\]
 
 
   \item Peter believes that if it takes at most 4 tosses to obtain the first head, then the coin is of the first type. What is the probability that Peter correctly identifies a randomly chosen coin from the ten mixed coins?\\
-
+  
+Let Y denote the number of trials until the first head is obtained. \( Y \sim Geom(p) \).\\
+Let W denote the event that is takes at most 4 tosses to obtain the first head.\\
+Then we have \( Pr(W) = Pr(Y = 1) + Pr(Y = 2) + Pr(Y = 3) + Pr(Y = 4)\). \\
+Let \( X_1 \) denote the event that Peter picks the first type of coin. \(Pr(X_1) = 0.7, \  p = 0.5.\) \\
+%Let \( X_2 \) denote the event that Peter picks the second type of coin. \( Pr(X_2) = 0.3, \ p = 0.7.\) \\
+\[
+Pr(W | X_1) = (1-0.5)^{1-1} \ 0.5 + (1-0.5)^{2-1}\ 0.5 + (1-0.5)^{3-1} \ 0.5 + (1 - 0.5)^{4-1} \ 0.5 = \frac{15}{16} = 0.9375
+\]
+%\[
+%Pr(W | X_2) = (1-0.7)^{1-1} \ 0.7 + (1-0.7)^{2-1}\ 0.7 + (1-0.7)^{3-1} \ 0.7 + (1 - 0.7)^{4-1} \ 0.7 = \frac{9919}{10000} = 0.9919
+%\]
+%Total probability:
+%\[
+%Pr(W) = 0.7 \times 0.9375 + 0.3 \times 0.9919 = 0.65625 + 0.29757 = 0.95382
+%\]
+So the probability that Peter correctly identifiers a randomly chosen coin is:
+\[
+Pr(W \cap X_1) = Pr(W | X_1) Pr(X_1) = 0.9375 \times 0.7 = 0.65625
+\]
 \end{enumerate}
 
 
