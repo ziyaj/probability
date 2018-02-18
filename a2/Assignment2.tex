@@ -129,10 +129,8 @@ SD(Y_1 + Y_2 + Y_3) = \sqrt{\frac{2}{3}} + 2\sqrt{\frac{2}{3}} + 3\sqrt{\frac{2}
 %===================================================
 % Julian's question
 \item
-Peter has prepared two types of magic coins for a show. The probability that a head is tossed for the first type of coin is 0.5 and that for the second type is 0.7. Peter accidentally mixes seven coins of the first type and three coins of the second type. 
-He then randomly picks one coin from the ten mixed coins.
 \begin{enumerate}
-  \item Peter plans to toss the chosen coin repeatedly until 3 heads are obtained.
+  \item 
   \begin{enumerate}
     \item The probability of picking the first type of coin is 7/10. Let \( X_1 \) be the number of trials Peter needs to have 3 heads when he picks the first type of coin, then \( X_1 \sim NegBin(3, 0.5) \). \\
     \\
@@ -188,9 +186,7 @@ Var(X) = \mathbb{E}(X^2) - [\mathbb{E}(X)]^2 = 0.7 \times 42 + 0.3 \times \frac{
 
   \end{enumerate}
 
-  \item If it takes exactly 6 tosses to obtain 3 heads, what is the probability that the coin is of the first type?\\
-\\
-Let Y denote the number of tosses needed to obtain 3 heads. \( Y \sim NegBin(3, p) \). \\
+  \item Let Y denote the number of tosses needed to obtain 3 heads. \( Y \sim NegBin(3, p) \). \\
 Let \( X_1 \) denote the event that Peter picks the first type of coin. \(Pr(X_1) = 0.7, \  p = 0.5.\) \\
 Let \( X_2 \) denote the event that Peter picks the second type of coin. \( Pr(X_2) = 0.3, \ p = 0.7.\) \\
 \[
@@ -209,9 +205,7 @@ Pr(X_1 \ | Y = 6) = \frac{Pr(Y = 6 \  | X_1) Pr(X_1)}{Pr(Y = 6)} = \frac{0.15625
 \]
 
 
-  \item Peter believes that if it takes at most 4 tosses to obtain the first head, then the coin is of the first type. What is the probability that Peter correctly identifies a randomly chosen coin from the ten mixed coins?\\
-  
-Let Y denote the number of trials until the first head is obtained. \( Y \sim Geom(p) \).\\
+  \item Let Y denote the number of trials until the first head is obtained. \( Y \sim Geom(p) \).\\
 Let W denote the event that is takes at most 4 tosses to obtain the first head.\\
 Then we have \( Pr(W) = Pr(Y = 1) + Pr(Y = 2) + Pr(Y = 3) + Pr(Y = 4)\). \\
 Let \( X_1 \) denote the event that Peter picks the first type of coin. \(Pr(X_1) = 0.7, \  p = 0.5.\) \\
