@@ -46,16 +46,14 @@
 \begin{document}
 \maketitle
 
-\begin{enumerate}[label=\textbf{Q \arabic*:},start=1]
+\begin{enumerate}[label=\textbf{Question \arabic*:},start=1]
 
 %Question 1:
 %===================================================
 % Adrian's question
 \item 
 \begin{enumerate}
-\item Write down the probability mass function for completing this experiment one time.\\
-\\
-Let Y denote the sum of the values of flipping the coin B times.\\
+\item Let Y denote the sum of the values of flipping the coin B times.\\
 Let \(X_1\) denote the value by flipping the coin 1 time, i.e., drawing ball 1. \( X_1 \sim Bin(1, 0.5).\) \\
 Let \(X_2\) denote the value by flipping the coin 2 times, i.e., drawing ball 2. \( X_2 \sim Bin(2, 0.5).\) \\
 Let \(X_3\) denote the value by flipping the coin 3 times, i.e., drawing ball 3. \( X_3 \sim Bin(3, 0.5).\) \\
@@ -89,9 +87,7 @@ Therefore, the probability mass function is:
         \end{cases}
   \]
 
-\item Find the expectation and the standard deviation of this random variable.\\
-
-Expectation:
+\item Expectation:
 \[
 \mathbb{E}(Y) = 0 \times \frac{7}{24} + 1 \times \frac{11}{24} + 2 \times \frac{5}{24} + 3 \times \frac{1}{24} = 1
 \]
@@ -105,19 +101,20 @@ SD(Y) = \sqrt{Var(Y)} = \sqrt{\frac{2}{3}}
 \]
 
 
-\item Now suppose we repeat this experiment 3 times, but on the second run we flip a fair coin labelled 0 or 2, and on the third run we flip a fair coin labelled 0 or 3. What is the expectation and standard deviation of the total sum observed after completing this three part experiment?\\
-\\
-The 3 experiments are independent.\\
-Let \(Y_1\) denote the result we get from the first experiment. \( \mathbb{E}(Y_1) = 1, SD(Y_1) = \sqrt{\frac{2}{3}} \). \\
+\item The 3 experiments are independent.\\
+Let \(Y_1\) denote the result we get from the first experiment. From (b) we know that:
+\[
+\mathbb{E}(Y_1) = 1, \ SD(Y_1) = \sqrt{\frac{2}{3}} 
+\]
 Let \(Y_2\) denote the result we get from the second experiment.\(Y_2 = 2 Y_1\), so
 \[
-\mathbb{E}(Y_2) = 2, SD(Y_2) = 2\sqrt{\frac{2}{3}}
+\mathbb{E}(Y_2) = 2, \ SD(Y_2) = 2\sqrt{\frac{2}{3}}
 \]
 Let \(Y_3\) denote the result we get from the third experiment.\(Y_3 = 3 Y_1\), so
 \[
-\mathbb{E}(Y_3) = 3, SD(Y_3) = 3 \sqrt{\frac{2}{3}}
+\mathbb{E}(Y_3) = 3, \ SD(Y_3) = 3 \sqrt{\frac{2}{3}}
 \]
-So total sum:
+So the expectation and standard deviation for the total sum are:
 \[
 \mathbb{E}(Y_1 + Y_2 + Y_3) = 1 + 2 + 3 = 6
 \]
@@ -137,15 +134,62 @@ He then randomly picks one coin from the ten mixed coins.
 \begin{enumerate}
   \item Peter plans to toss the chosen coin repeatedly until 3 heads are obtained.
   \begin{enumerate}
-    \item Find the probability mass function of the number of tosses needed until 3 heads are obtained.\\
+    \item The probability of picking the first type of coin is 7/10. Let \( X_1 \) be the number of trials Peter needs to have 3 heads when he picks the first type of coin, then \( X_1 \sim NegBin(3, 0.5) \). \\
+    \\
+    The probability of picking the first type of coin is 3/10. Let \( X_2 \) be the number of trials Peter needs to have 3 heads when he picks the first type of coin, then \( X_2 \sim NegBin(3, 0.7) \). \\
+    \\
+    Let X denote the number of trials Peter needs to get 3 heads after he randomly picks a coin. Then the probability mass function is:
+\[
+p(x) = 0.7 \cdot p(x_1) + 0.3 \cdot p(x_2) =\frac{7}{10} {x-1 \choose 2} 0.5^3 0.5^{x-3} + \frac{3}{10} {x-1 \choose 2} 0.7^3 0.3^{x-3} 
+\]
+Therefore,
+\[
+p(x) = 0.7{x-1 \choose 2}(0.5^x + 0.7^2 \cdot 0.3^{x-2}), \ x = 3, 4, 5, ...
+\]
 
 
+    \item The expectation is:
+\[
+\mathbb{E}(X) = \sum_x x \cdot p(x) = 0.7 \  \mathbb{E}(X_1) + 0.3 \ \mathbb{E}(X_2) = 0.7 \times \frac{3}{0.5} + 0.3 \times \frac{3}{0.7} = \frac{192}{35} = 5.486
+\]
+The variance is:
+\[
+Var(X) = \mathbb{E}(X^2) - [\mathbb{E}(X)]^2 = 0.7 \ \mathbb{E}(X_1^2) + 0.3 \ \mathbb{E}(X_2^2) - [\mathbb{E}(X)]^2
+\]
+(1) Let's compute \(\mathbb{E}(X_1^2) \)
+\[
+\mathbb{E}(X_1^2) = \sum_x x^2 \ {x-1 \choose 2} 0.5^x = 3 \sum_x x {x \choose 3} 0.5^x
+\]
+let \( y = x + 1 \), we have 
+\[
+\mathbb{E}(X_1^2) = 3 \sum_y (y-1) \ {y-1 \choose 3} 0.5^{y-1} = 6 [\sum_y y {y-1 \choose 3} 0.5^y - \sum {y-1 \choose 3} 0.5^y]
+\]
+suppose we have \( Y_1 \sim NegBin(4, 0.5) \)
+\[
+\mathbb{E}(X_1^2) = 6 [\mathbb{E}(Y_1) - 1] = 6 (\frac{4}{0.5} - 1) = 42
+\]
+(2) Let's compute \(\mathbb{E}(X_2^2) \)
+\[
+\mathbb{E}(X_2^2) = \sum_x x^2 \ {x-1 \choose 2} 0.7^3 \ 0.3^{x-3} = \frac{30}{7} \sum_x x {x \choose 3} 0.7^4 \ 0.3^{x-3}
+\]
+let \( y = x + 1 \), we have 
+\[
+\mathbb{E}(X_2^2) = \frac{30}{7} \sum_y (y-1) {y-1 \choose 3} 0.7^4 \ 0.3^{y-4} = \frac{30}{7} (\sum_y y {y-1 \choose 3} 0.7^4 \ 0.3^{y-4} - \sum_y {y-1 \choose 3} 0.7^4 \ 0.3^{y-4})
+\]
+suppose we have \( Y_2 \sim NegBin(4, 0.7) \)
+\[
+\mathbb{E}(X_2^2) = \frac{30}{7} [\mathbb{E}(Y_2) - 1] = \frac{30}{7} (\frac{4}{0.7} - 1) = \frac{990}{49}
+\]
+(3) Finally, we compute the variance:
+\[
+Var(X) = \mathbb{E}(X^2) - [\mathbb{E}(X)]^2 = 0.7 \times 42 + 0.3 \times \frac{990}{49} - (\frac{192}{35})^2 = \frac{6576}{1225} = 5.368
+\]
 
-    \item What is the expected number of tosses needed to obtain 3 heads? What is the variance?\\
 
   \end{enumerate}
 
   \item If it takes exactly 6 tosses to obtain 3 heads, what is the probability that the coin is of the first type?\\
+
 
 
 
