@@ -9,6 +9,7 @@
 \usepackage{amsmath}
 \usepackage{amsfonts}
 \usepackage{amsthm}
+\usepackage{breqn}
 
 %General formatting Packages
 \usepackage{fancyhdr} %To put headers in
@@ -50,14 +51,79 @@
 %Question 1:
 %===================================================
 % Adrian's question
-\item Suppose that we have a bin containing 3 balls labelled 1 through 3, and a fair coin labelled 0 on one side and 1 on the other side. We draw a ball at random from the bin, observe the number $B$, put the ball back in the bin, flip the coin $B$ times, and then sum up the $B$ values of the coin. \\
+\item 
 \begin{enumerate}
 \item Write down the probability mass function for completing this experiment one time.\\
+\\
+Let Y denote the sum of the values of flipping the coin B times.\\
+Let \(X_1\) denote the value by flipping the coin 1 time, i.e., drawing ball 1. \( X_1 \sim Bin(1, 0.5).\) \\
+Let \(X_2\) denote the value by flipping the coin 2 times, i.e., drawing ball 2. \( X_2 \sim Bin(2, 0.5).\) \\
+Let \(X_3\) denote the value by flipping the coin 3 times, i.e., drawing ball 3. \( X_3 \sim Bin(3, 0.5).\) \\
+The probability of drawing ball 1, 2, 3 is equal to 1/3.\\
+\begin{equation}
+\begin{split}
+Pr(Y=0) & = \frac{1}{3} \times (Pr(X_1 = 0) + Pr(X_2 = 0) + Pr(X_3 = 0)) \\
+& = \frac{1}{3} \times ({1 \choose 0}(\frac{1}{2})^0(\frac{1}{2})^1 + {2 \choose 0}(\frac{1}{2})^0(\frac{1}{2})^2 + {3 \choose 0}(\frac{1}{2})^0(\frac{1}{2})^3) \\
+& = \frac{7}{24} \\
+\\
+Pr(Y=1) & = \frac{1}{3} \times (Pr(X_1 = 1) + Pr(X_2 = 1) + Pr(X_3 = 1)) \\
+& = \frac{1}{3} \times ({1 \choose 1}(\frac{1}{2})^1(\frac{1}{2})^0 + {2 \choose 1}(\frac{1}{2})^1(\frac{1}{2})^1 + {3 \choose 1}(\frac{1}{2})^1(\frac{1}{2})^2) \\
+& = \frac{11}{24} \\
+\\
+Pr(Y=2) & = \frac{1}{3} \times (Pr(X_2 = 2) + Pr(X_3 = 2)) \\
+& = \frac{1}{3} \times ({2 \choose 2}(\frac{1}{2})^2(\frac{1}{2})^0 + {3 \choose 2}(\frac{1}{2})^2(\frac{1}{2})^1) \\
+& = \frac{5}{24} \\
+\\
+Pr(Y=3) & = \frac{1}{3} \times Pr(X_3 = 3) \\
+& = \frac{1}{3} \times ({3 \choose 3}(\frac{1}{2})^3(\frac{1}{2})^0) \\
+& = \frac{1}{24} \\
+\end{split}
+\end{equation}
+Therefore, the probability mass function is:
+  \[
+    p(y) = \begin{cases}
+        7/24, & y = 0\\
+        11/24, & y = 1\\
+        5/24, & y = 2\\
+        1/24 , & y = 3\\
+        \end{cases}
+  \]
 
 \item Find the expectation and the standard deviation of this random variable.\\
 
-\item Now suppose we repeat this experiment 3 times, but on the second run we flip a fair coin labelled 0 or 2, and on the third run we flip a fair coin labelled 0 or 3. What is the expectation and standard deviation of the total sum observed after completing this three part experiment?
+Expectation:
+\[
+\mathbb{E}(Y) = 0 \times \frac{7}{24} + 1 \times \frac{11}{24} + 2 \times \frac{5}{24} + 3 \times \frac{1}{24} = 1
+\]
+Variance:
+\[
+Var(Y) = (0 - 1)^2 \times \frac{7}{24} + (1 - 1)^2 \times \frac{11}{24} + (2 - 1)^2 \times \frac{5}{24} + (3 - 1)^2 \times \frac{1}{24} = \frac{2}{3}
+\]
+Standard Deviation:
+\[
+SD(Y) = \sqrt{Var(Y)} = \sqrt{\frac{2}{3}}
+\]
 
+
+\item Now suppose we repeat this experiment 3 times, but on the second run we flip a fair coin labelled 0 or 2, and on the third run we flip a fair coin labelled 0 or 3. What is the expectation and standard deviation of the total sum observed after completing this three part experiment?\\
+\\
+The 3 experiments are independent.\\
+Let \(Y_1\) denote the result we get from the first experiment. \( \mathbb{E}(Y_1) = 1, SD(Y_1) = \sqrt{\frac{2}{3}} \). \\
+Let \(Y_2\) denote the result we get from the second experiment.\(Y_2 = 2 Y_1\), so
+\[
+\mathbb{E}(Y_2) = 2, SD(Y_2) = 2\sqrt{\frac{2}{3}}
+\]
+Let \(Y_3\) denote the result we get from the third experiment.\(Y_3 = 3 Y_1\), so
+\[
+\mathbb{E}(Y_3) = 3, SD(Y_3) = 3 \sqrt{\frac{2}{3}}
+\]
+So total sum:
+\[
+\mathbb{E}(Y_1 + Y_2 + Y_3) = 1 + 2 + 3 = 6
+\]
+\[
+SD(Y_1 + Y_2 + Y_3) = \sqrt{\frac{2}{3}} + 2\sqrt{\frac{2}{3}} + 3\sqrt{\frac{2}{3}} = 6\sqrt{\frac{2}{3}}
+\]
 \end{enumerate}
 
 
