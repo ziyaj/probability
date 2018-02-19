@@ -320,7 +320,12 @@ Q.E.D.
 \item You are part of a field team in the Strait of Georgia tasked with surveying the nesting habits of a colony of Pelagic Cormorants ({\em Phalacrocorax pelagicus}), an iconic and precipitously declining species native to coastal British Columbia. Your supervisor wants to ensure the team is big enough to monitor all cormorant pairs in the colony at least 90\% of the time. Each member of the field team can reliably observe 5 cormorant pairs simultaneously. 
 \begin{enumerate}
 \item The expected number of cormorant pairs at the colony at any one time is known to be 20. How big should the field team be to ensure that at least 90\% of the time all pairs can be observed? 
-({\em Hint:} use R or an online applet to calculate the appropriate probabilities.)
+({\em Hint:} use R or an online applet to calculate the appropriate probabilities.)\\
+
+Let X be the number of cormorant pairs appearing at the colony. \( X \sim Poisson(20 \times 90\%) \) \\
+\[
+p(x) = \frac{18^x e^{-18}}{x!}
+\]
 
 \item Due to budget considerations, your supervisor was only able to recruit 3 people for the field team (yourself and two others). Unfortunately, when you arrive at the colony of study, you find that the colony is twice the size as anticipated. with twice the average number of cormorant pairs present at any one time. What is the probability that your team of 3 can observe all the cormorant pairs at any one time? (Your supervisor is busy with other tasks so can't help with the observations....) 
 \end{enumerate}
@@ -330,22 +335,45 @@ Q.E.D.
 % Question 5:
 %===================================================
 
-\item Suppose the amount of energy (in kilocalories), $E$, provided by the sun to a random arbutus tree on a winter day in Victoria follows a random variable characterized by the following probability density function:
-\[
-f(x) = \left\{
-\begin{array}{ll}
-cx\sin(x) & \mbox{ if } 0\leq x\leq \pi \\
-0 & \mbox{ otherwise} 
-\end{array}
-\right.
-\]
-where $c$ is a fixed constant. 
+\item 
 \begin{enumerate}
-  \item Find the value of $c$ that makes $f(x)$ an honest PDF.\\
+  \item 
+\[
+\int_{-\infty}^{\infty} f(x) dx = \int_{0}^{\pi} cx sin(x) dx = 1
+\]
+\[
+ \int_{0}^{\pi} cx sin(x) dx = c( (x \cdot -cos(x))|_{0}^{\pi} - \int_{0}^{\pi} -cos(x)dx ) = c (\pi - 0 + sin(x) |_{0}^{\pi}) = c \pi
+\]
+\[
+c \pi = 1 \Rightarrow c = \frac{1}{\pi}
+\]
 
-  \item Find the cumulative distribution function of $E$.\\
+  \item 
+\[
+ \int \frac{1}{\pi} x sin(x) dx = \frac{1}{\pi}( -xcos(x) + \int cos(x)dx ) = \frac{1}{\pi} (-xcos(x) + sin(x) + C)
+\]
+In this case $C = 0$. Therefore, the CDF of E is:
+\[
+F(x) = \begin{cases}
+        0, & x \leq 0\\
+        \frac{1}{\pi} (-xcos(x) + sin(x)), & 0 < x < \pi\\
+        1, & x \ge \pi\\
+        \end{cases}
+\]
 
-  \item Suppose we would like to study how much energy arbutus trees around James Bay in Victoria are absorbing. We start sampling trees at random in James Bay and recording their energy intake from the sun. How likely is it that we have to sample more than 10 trees to find the first with an energy intake exceeding 3 kilocalories?
+
+  \item 
+\[
+p = Pr(X > 3) = 1 - Pr(X \leq 3) = 1 - \frac{1}{\pi}(-3 cos(3) + sin(3)) = 0.00970690954 \approx 0.01
+\]
+Let Y denote the number of samples we take until we find the first with an energy intake exceeding 3 kilocalories. \\
+\[
+Y \sim Geom(0.01)
+\]
+\[
+Pr(Y > 10) = 1 - (\sum_{k=1}^{10} Pr(Y = k) ) = 1 - (\sum_{k=1}^{10} 0.99^{k-1} 0.01) = \texttt{1 - pgeom(10, 0.01)} = 0.8953383
+\]
+
 
 
 \end{enumerate}
