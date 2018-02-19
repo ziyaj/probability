@@ -228,22 +228,87 @@ Pr(W \cap X_1) = Pr(W | X_1) Pr(X_1) = 0.9375 \times 0.7 = 0.65625
 
 
 
-\newpage
 
 %Question 3:
 %===================================================
 
 \item 
-Suppose there are two separate polling agencies interested in gauging the opinions of UBC students regarding how the current provincial goverrnment has been dealing with the proposed Kinder Morgan pipeline expansion from Edmonton to Burnaby. Both polling agencies will ask random UBC students to answer ``Yes" or ``No" to the following question: {\em I generally approve of how the current BC government is handling the proposed Kinder Morgan pipeline expansion.}
-
 \begin{enumerate}
-  \item The two agencies first run a test poll on a random sample of students from a UBC Statistics class containing 20 students. Polling agency A samples 10 students {\em without replacement} from the class to answer the question, whereas polling agency B samples 10 students {\em with replacement} from the same class. Identify the random variables, $A$ and $B$, that could model these two polling procedures and calculate $\pr(5\leq A\leq 7)$ and $\pr(5\leq B\leq 7)$. Which sampling scheme seems better and why? Suppose that 12 out of the 20 students in the class would answer ``Yes" to the polling question.\\
+  \item A is a Hypergeometric random variable with parameters N = 20, n = 10, m = 12. \\
+So \( A \sim Hypergeom(20, 10, 12) \).\\
+\[
+Pr(5 \leq A \leq 7) = Pr(A = 5) + Pr(A = 6) + Pr(A = 7)
+\]
+\[
+= \frac{{12 \choose 5} {8 \choose 5} }{{20 \choose 10}} + \frac{{12 \choose 6} {8 \choose 4}}{{20 \choose 10}} + \frac{{12 \choose 7} {8 \choose 3}}{{20 \choose 10}} = \frac{153384}{184756} = 0.8301976661
+\]
 
-  \item Now suppose the polling agencies are ready to sample a large proportion of UBC students on Main Mall. Assume the student population of UBC is 20,000 and that $60\%$ of the student population would answer ``Yes" to the polling question. If the two polling agencies sample 1000 student opinions using their respective sampling schemes, and we use $A$ and $B$ to denote the number of sampled students answering ``Yes" to the polling question from each agency respectively, what is $\e(A)$ and $\e(B)$?\\
+B is a Binomial random variable with parameters n = 10, p = 12/20 = 0.6.\\
+So \( B \sim Bin(10, 0.6) \). \\
+\[
+Pr(5 \leq B \leq 7) = Pr(B = 5) + Pr(B = 6) + Pr(B = 7) 
+\]
+\[
+= {10 \choose 5} 0.6^5 \ 0.4^5 + {10 \choose 6} 0.6^6 \ 0.4^4 + {10 \choose 7} 0.6^7 \ 0.4^3 = 0.6664716288
+\]
 
-  \item Now find $\pr(\e(A) - 15 \leq A \leq \e(A) + 15)$ and $\pr(\e(B) - 15 \leq B \leq \e(B) + 15)$. How do the differences in these probabilities compare to the differences in the probabilities you found in part (a)? Do you still prefer one sampling scheme to the other? Why or why not?\\
+A's sampling scheme seems better because there is no "strengthen" of repeated opinion in the final result, so A's scheme can possibly represent a larger number of students than B does.\\
 
-  \item {\em [Optional bonus question]} Show that as the population size $N$ grows, the probability mass function of a hypergeometric random variable approaches the probability mass function of a binomial random variable, assuming a constant chance of success. That is, show $$\lim_{N\rightarrow\infty} \frac { {m \choose x}{N-m \choose n-x}}{ {N\choose n}} = {n\choose x} p^x (1-p)^{n-x},$$ where $p = \frac mN$ is constant. {\em Hint:} Rewrite the choose functions in terms of factorials and remember that, as we have seen in class, the highest order terms will dominate in the limit.
+  \item A is a Hypergeometric random variable with parameters N = 20000, n = 1000, m = \( 20000 \times 60\% \)= 12000. \\
+So \( A \sim Hypergeom(20000, 1000, 12000) \).\\
+\[
+\mathbb{E}(A) = \frac{ n m }{N} = \frac{1000 \times 12000}{20000} = 600
+\]
+
+B is a Binomial random variable with parameters n = 1000, p = 60\% = 0.6.\\
+So \( B \sim Bin(1000, 0.6) \). \\
+\[
+\mathbb{E}(B) = np = 1000 \times 0.6 = 600
+\]
+
+  \item 
+  
+\[
+Pr(\mathbb{E}(A) - 15 \leq A \leq \mathbb{E}(A) + 15) = \sum_{k = 585}^{615} \frac{{12000 \choose k} {8000 \choose n-k}}{{20000 \choose 1000}} = 1
+\]
+\[
+= \texttt{phyper(615, 12000, 8000, 1000) - phyper(584, 12000, 8000, 1000)} = 0.695355
+\]
+
+\[
+Pr(\mathbb{E}(B) - 15 \leq B \leq \mathbb{E}(B) + 15) = \sum_{k = 585}^{615} {1000 \choose k} 0.6^k 0.4^{1000-k}
+\]
+\[
+= \texttt{pbinom(615, size=1000, prob=0.6) - pbinom(584, size=1000, prob=0.6)} = 0.6829448
+\]
+\[
+\texttt{Diff}_a = 0.8301976661 - 0.6664716288 = 0.1637260373
+\]
+\[
+\texttt{Diff}_c = 0.695355 - 0.6829448 = 0.0124102
+\]
+There difference in probabilities found in (c) is significantly smaller than the difference in probabilities found in (a).
+Therefore, I do not prefer one sampling scheme to the other. When the sample space gets bigger and bigger, the resulting probabilities chosen between binomial and hypergeometric gets closer and closer. If the sample space is large enough, the difference in resulting probabilities becomes insignificant.
+
+  \item {\em [Optional bonus question]} 
+\textbf{Proof:}\\
+\begin{equation}
+\begin{split}
+\lim_{N\rightarrow\infty} \frac { {m \choose x}{N-m \choose n-x}}{ {N\choose n}} & = \lim_{N\rightarrow\infty} \frac { \frac{m!}{x!(m-x)!} \cdot \frac{(N-m)!}{(n-x)!(N-m-(n-x))!}}{ \frac{N!}{n!(N-n)!} } \\
+& = \lim_{N\rightarrow\infty} \frac{n!}{x!(n-x)!} \cdot \frac{m! (N-m)! (N-n)!}{(m-x)! (N-m - (n-x))! N!} \\
+& = \frac{n!}{x!(n-x)!}  \lim_{N\rightarrow\infty} \frac{(m-x+1)...m \cdot (N-m-(n-x)+1)...(N-m)}{(N-n+1)...N} \\
+& = \frac{n!}{x!(n-x)!}  (\frac{m}{N})^x (\frac{N-m}{N})^{n-x} \\
+& = {n \choose x} p^x (1-p)^{n-x}
+\end{split}
+\end{equation}
+
+line 1 just expand the combinations. \\
+line 2 rearranges the division and pulls out  $\frac{n!}{x!(n-x)!}$ \\
+line 3 cancels same items in $m!$ with $(m-x)!$,  $(N-m)!$ with $(N-m-(n-x))!$, $N!$ with $(N-n)!$. \\
+line 4, notice that there are $x$ items in $(m-x+1)...m$, and there are $(n-x)$ items in $(N-m-(n-x)+1)...(N-m)$, and there are $n$ items in $(N-n+1)...N$, also $n = x + n-x$. So when we take the limit, we can replace all items in $(m-x+1)...m$ with $m^x$, $(N-m-(n-x)+1)...(N-m)$ with $(N-m)^{n-x}$, $(N-n+1)...N$ with $N^x N^{n-x}$ because they are asymptotically equivalent when taking the limit. Therefore we get the result in line 4. \\
+line 5, notice that expression in line 4 is just the expanded form of line 5, after replacing $\frac{m}{N}$ with $p$.\\
+Q.E.D.
+
 \end{enumerate}
 
 
