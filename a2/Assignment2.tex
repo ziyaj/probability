@@ -317,17 +317,34 @@ Q.E.D.
 \vspace*{3mm}
 
 %Question 4:
-\item You are part of a field team in the Strait of Georgia tasked with surveying the nesting habits of a colony of Pelagic Cormorants ({\em Phalacrocorax pelagicus}), an iconic and precipitously declining species native to coastal British Columbia. Your supervisor wants to ensure the team is big enough to monitor all cormorant pairs in the colony at least 90\% of the time. Each member of the field team can reliably observe 5 cormorant pairs simultaneously. 
+\item 
 \begin{enumerate}
-\item The expected number of cormorant pairs at the colony at any one time is known to be 20. How big should the field team be to ensure that at least 90\% of the time all pairs can be observed? 
-({\em Hint:} use R or an online applet to calculate the appropriate probabilities.)\\
-
-Let X be the number of cormorant pairs appearing at the colony. \( X \sim Poisson(20 \times 90\%) \) \\
+\item
+Let X be the number of cormorant pairs appearing at the colony. \( X \sim Poisson(20) \) \\
 \[
-p(x) = \frac{18^x e^{-18}}{x!}
+p(x) = \frac{20^x e^{-20}}{x!}
+\]
+We would like to know the value of k, such that:
+\[
+p(0) + p(1) + p(2) + ... +  p(k) \geq 90\%
+\]
+\[
+\frac{20^0 e^{-20}}{0!} + \frac{20^1 e^{-20}}{1!} + \frac{20^2 e^{-20}}{2!} + ... + \frac{20^k e^{-20}}{k!} \geq 90\%
+\]
+Using R, we notice that \texttt{ppois(25, lambda=20) = 0.887815}, and \texttt{ppois(26, lambda=20) = 0.9221132}. Therefore $k = 26$. \\
+So the expected number of the team size is: $26/5 = 5.2$ member.\\
+
+\item 
+3 members can observe $3 \times 5 = 15$ cormorant pairs.\\
+Let X be the number of cormorant pairs appearing at the colony. \( X \sim Poisson(20 \times 2) \) \\
+\[
+p(x) = \frac{40^x e^{-40}}{x!}
+\]
+The probability that 3 members can observe all the cormorant pairs at any one time is:
+\[
+p(0) + p(1) + p(2) + ... + p(15) = \sum_{k=0}^{15} \frac{40^k e^{-40}}{k!} = \texttt{ppois(15, lambda=40)} = 5.463981 \times 10^{-6}
 \]
 
-\item Due to budget considerations, your supervisor was only able to recruit 3 people for the field team (yourself and two others). Unfortunately, when you arrive at the colony of study, you find that the colony is twice the size as anticipated. with twice the average number of cormorant pairs present at any one time. What is the probability that your team of 3 can observe all the cormorant pairs at any one time? (Your supervisor is busy with other tasks so can't help with the observations....) 
 \end{enumerate}
 
 
@@ -370,6 +387,7 @@ Let Y denote the number of samples we take until we find the first with an energ
 \[
 Y \sim Geom(0.01)
 \]
+The probability that we have to sample more than 10 trees is:
 \[
 Pr(Y > 10) = 1 - (\sum_{k=1}^{10} Pr(Y = k) ) = 1 - (\sum_{k=1}^{10} 0.99^{k-1} 0.01) = \texttt{1 - pgeom(10, 0.01)} = 0.8953383
 \]
