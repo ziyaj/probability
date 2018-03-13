@@ -1,0 +1,125 @@
+\documentclass{article}
+\usepackage{amsmath}
+\title{STAT 302: Bonus for HW}
+\author{
+	Jin, Ziyang\\
+	\texttt{\# 34893140}\
+}
+
+\begin{document}
+	\maketitle
+
+\noindent A federal committe of three people is to be randomly selected from a group consisting of four Liberals, three Conservatives, and two NDPers (sorry Greens and Bloc). Let L denote the number of Liberals on the committee, and let C denote the number of Conservatives on the committee.\\
+\\(c) [BONUS for HW:] Let N denote the number of NDPers on the committee. Find the joint probability mass function of L, C, and N by directly generalizing our definitions. Compute the marginals for each party.\\
+\\
+\textbf{Solution}\\
+\\
+The joint probability function is:\\
+\\
+Table when N = 0
+\begin{center}
+ \begin{tabular}{|| c c c c c ||} 
+ \hline
+ Pr(L=l, C= c) & L=0 & L=1 & L=2 & L = 3\\ [0.5ex] 
+ \hline\hline
+ C=0 & 0 & 0 & 0 & 4/84 \\ 
+ \hline
+ C=1 & 0 & 0 & 18/84 & 0 \\
+ \hline
+ C=2 & 0 & 12/84 & 0 & 0 \\
+ \hline
+ C=3 & 1/84 & 0 & 0 & 0 \\
+ \hline
+\end{tabular}
+\end{center}
+Table when N = 1
+\begin{center}
+ \begin{tabular}{|| c c c c c ||} 
+ \hline
+ Pr(L=l, C= c) & L=0 & L=1 & L=2 & L = 3\\ [0.5ex] 
+ \hline\hline
+ C=0 & 0 & 0 & 12/84 & 0 \\ 
+ \hline
+ C=1 & 0 & 24/84 & 0 & 0 \\
+ \hline
+ C=2 & 6/84 & 0 & 0 & 0 \\
+ \hline
+ C=3 & 0 & 0 & 0 & 0 \\
+ \hline
+\end{tabular}
+\end{center}
+Table when N = 2
+\begin{center}
+ \begin{tabular}{|| c c c c c ||} 
+ \hline
+ Pr(L=l, C= c) & L=0 & L=1 & L=2 & L = 3\\ [0.5ex] 
+ \hline\hline
+ C=0 & 0 & 4/84 & 0 & 0 \\ 
+ \hline
+ C=1 & 3/84 & 0 & 0 & 0 \\
+ \hline
+ C=2 & 0 & 0 & 0 & 0 \\
+ \hline
+ C=3 & 0 & 0 & 0 & 0 \\
+ \hline
+\end{tabular}
+\end{center}
+The marginal probability functions are:\\
+\\
+\begin{equation} \label{eq1}
+\begin{split}
+p_C(c) = & \sum_{all\ l, n} p(c, l, n) \\
+ = &\ p(c, 0, 0) + p(c,  0, 1) + p(c, 0, 2) \\
+& + p(c, 1, 0) + p(c, 1, 1) + p(c, 1, 2) \\
+& + p(c,  2, 0) + p(c, 2, 1) + p(c, 2, 2) \\
+\end{split}
+\end{equation}
+\begin{center}
+ \begin{tabular}{|| c c c c c ||} 
+ \hline
+C=c & C=0 & C=1 & C=2 & C = 3\\ [0.5ex] 
+ \hline\hline
+$p_C(c)$ & 20/84 & 45/84 & 18/84 & 1/84 \\ 
+ \hline
+\end{tabular}
+\end{center}
+
+\begin{equation} \label{eq2}
+\begin{split}
+p_L(l) = & \sum_{all\ c, n} p(c, l, n) \\
+ = &\ p(0, l, 0) + p(0,  l, 1) + p(0, l, 2) \\
+& + p(1, l, 0) + p(1, l, 1) + p(1, l, 2) \\
+& + p(2, l, 0) + p(2, l, 1) + p(2, l, 2) \\
+& + p(3, l, 0) + p(3, l, 1) + p(3, l, 2) \\
+\end{split}
+\end{equation}
+\begin{center}
+ \begin{tabular}{|| c c c c c ||} 
+ \hline
+L=l & L=0 & L=1 & L=2 & L = 3\\ [0.5ex] 
+ \hline\hline
+$p_L(l)$ & 10/84 & 40/84 & 30/84 & 4/84 \\ 
+ \hline
+\end{tabular}
+\end{center}
+
+\begin{equation} \label{eq3}
+\begin{split}
+p_N(n) = & \sum_{all\ c, l} p(c, l, n) \\
+ = &\ p(0, 0, n) + p(0, 1, n) + p(0, 2, n) + p(0, 3, n) \\
+& + p(1, 0, n) + p(1, 1, n) + p(1, 2, n) + p(1, 3, n) \\
+& + p(2, 0, n) + p(2, 1, n) + p(2, 2, n) + p(2, 3, n) \\
+& + p(3, 0, n) + p(3, 1, n) + p(3, 2, n) + p(3, 3, n) \\
+\end{split}
+\end{equation}
+\begin{center}
+ \begin{tabular}{|| c c c c ||} 
+ \hline
+N=n & N=0 & N=1 & N=2\\ [0.5ex] 
+ \hline\hline
+$p_N(n)$ & 35/84 & 42/84 & 7/84\\ 
+ \hline
+\end{tabular}
+\end{center}
+
+\end{document}
