@@ -1,0 +1,165 @@
+%Initial setup
+\documentclass[11pt]{article}
+\title{STAT302 Assignment \#2 Solutions}
+\author{Julian Ho}
+
+%Math Packages
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amsthm,mathabx}
+
+%General formatting Packages
+\usepackage{fancyhdr} %To put headers in
+\usepackage{multirow} %for tables
+\usepackage{graphicx,graphpap,rotate,geometry,subfigure} 
+\usepackage{enumitem} %Permits more customisation of lists than enumerate
+\usepackage{tikz} %for textcolor
+
+%Document Layout
+%Text positioning
+\marginparwidth 0pt %
+\marginparsep 0pt  %distance between marginal notes box and main text
+\oddsidemargin  0pt
+\evensidemargin  0pt
+\topmargin   0pt
+\textwidth   6.8in %control width of text on 8.5X11 page
+\textheight  9.50in %control height of text on 8.5X11 page
+\voffset -0.8in
+
+\newcommand{\pr}{\text{Pr}}
+\newcommand{\e}{\mathbb{E}}
+\newcommand{\var}{\text{Var}}
+\newcommand{\sd}{\text{SD}}
+
+%Header of the pages
+\pagestyle{fancy}
+\lhead{STAT 302}
+\rhead{Assignment 3}
+\setlength{\headheight}{14pt} %to make room for the header vertically due do squashed height
+\fancyhfoffset[R]{0.2in} %to stretch header to match the length of the textwidth.
+
+
+%=============================
+\begin{document}
+
+\begin{center}
+\textbf{WINTER 2017/18 TERM 2  \,\, STAT 302: ASSIGNMENT 3 \\
+Due: 2pm on Tuesday March 27, 2018}
+\end{center}
+
+\vspace*{2mm}
+\begin{itemize}
+  \item
+  Please remember to \textbf{include a cover sheet} when you submit your assignment. Please hand in your assignment in the STAT 302 assignment box on the ground floor of the Earth Sciences Building (ESB) by the due time.
+  \item
+  When answering the questions, writing down the final answer will not
+  be sufficient to receive full marks. Please show all calculations
+  unless otherwise specified.
+  Also define any events and notation that you use in your solutions.
+\end{itemize}
+
+
+\begin{enumerate}[label=\textbf{Question \arabic*:},start=1]
+
+%Question 1:
+%===================================================
+% Adrian's question
+\item
+We are studying a collection of molluscs living on a large beach in northern BC. The molluscs live near the high-tide line and it is known that their location is uniformly distributed with minimum -1 and maximum +2 metres from this line. Their daily energy intake (in kilocalories) turns out to be 1 plus 25\% of their squared location.
+\begin{enumerate}
+	\item What is the cumulative distribution function of the daily energy intake?\\
+
+	\item What is the probability density function of the daily energy intake?\\
+
+	\item What is the expected daily energy intake?\\
+
+\end{enumerate}
+
+
+
+
+
+%Question 2:
+%===================================================
+% Julian's question
+\item Let $X$ and $Y$ be two independent Bernoulli$(0.5)$ random variables and define $U = X + Y$ and $V = X - Y$. 
+\begin{enumerate}
+	\item Find the joint and marginal probability mass functions for $U$ and $V$. [It is sufficient to construct a table to describe these mass functions.]\\
+
+	\item Are $U$ and $V$ independent? Why or why not?\\
+
+	\item Find the conditional probability mass functions $p_{U|V = v}(u)$ and $p_{V|U=u}(v)$. [Again, you can construct a table to describe these mass functions.]\\
+
+\end{enumerate}
+
+
+
+
+
+%Question 3:
+%===================================================
+
+\item 
+This question will provide an intriguing contrast to Question 2. Recall that if we have a continuous random variable $X$ defined by a pdf $f_X(x)$, and we define a new random variable $Y = g(X)$ where $g$ is a bijective (i.e. one-to-one) transformation, then the inverse of $g$ is well-defined everywhere, $g^{-1}$, and the density of $Y$ is given by $$f_Y(y) = f_X(g^{-1}(y))\cdot \left| \frac d{dy} g^{-1}(y)\right|.$$ We can generalize this to the bivariate setting as follows. Suppose $X_1$ and $X_2$ are continuous random variables with joint pdf $f_{X_1,X_2}(x_1,x_2)$ and suppose that both $u = g_1(X_1,X_2)$ and $v = g_2(X_1,X_2)$ are bijective (i.e. one-to-one) transformations with inverses $g_1^{-1}(u,v)$ and $g_2^{-1}(u,v)$. If these inverse functions have continuous partial derivatives and nonzero {\em Jacobian} 
+\[
+J = \text{det}
+\begin{bmatrix}
+	\frac {\partial g_1^{-1}}{\partial u}	& \frac {\partial g_1^{-1}}{\partial v} \\
+	\frac {\partial g_2^{-1}}{\partial u}	& \frac {\partial g_2^{-1}}{\partial v}
+\end{bmatrix}
+= \frac {\partial g_1^{-1}}{\partial u} \frac {\partial g_2^{-1}}{\partial v} - \frac {\partial g_2^{-1}}{\partial u} \frac {\partial g_1^{-1}}{\partial v} \neq 0,
+\]
+then the joint density of $u$ and $v$ is $$f_{u,v}(u,v) = f_{X_1,X_2}\left( g_1^{-1}(u,v), g_2^{-1}(u,v)\right) |J|,$$ where $|J|$ is the absolute value of the Jacobian.
+
+\begin{enumerate}
+  \item Let $X_1$ and $X_2$ be independent standard normal random variables. Write down the joint probability density function of $X_1$ and $X_2$. Moreover, compute $\pr(X_1<1,X_2<1)$.\\
+
+  \item Define the transformations $u = g_1(x_1,x_2) = x_1 + x_2$ and $v = g_2(x_1,x_2) = x_1 - x_2$. Find the inverse functions $g_1^{-1}(u,v)$ and $g_2^{-1}(u,v)$ and compute the Jacobian of this bivariate transformation of variables.\\
+
+  \item Write down the joint pdf of $U = X_1 + X_2$ and $V = X_1 - X_2$ and show that this density separates over variables; i.e. show $f_{U,V}(u,v) = a(u)b(v)$ for some real functions $a(u)$ and $b(v)$. Recall from class that this implies that $U$ and $V$ are actually {\em independent}. \\
+
+  \item Let $X_1,\ldots,X_n$ be a random sample from a normal distribution with mean $\mu$ and variance $\sigma^2$. If $n=2$, show that the sample mean, $\widebar{X}$, and the sample variance, $S_X^2$, are independent random variables. [Hint: first write $\widebar{X}$ and $S_X^2$ in terms of $U$ and $V$ as above, remembering that $U$ and $V$ are linear combinations of {\em standard} normal random variables.]
+\end{enumerate}
+
+
+
+
+\vspace*{3mm}
+
+%Question 4:
+\item Let $W$ be a Gamma random variable with parameters ($\alpha = 2,\ \lambda = 2$). Conditional on the value $W = w$, $X$ is an exponential random variable with rate parameter $w$.
+\begin{enumerate}
+\item What is the conditional density function for $X$ given $W = w$? Be sure to indicate any restrictions on the values of $x$ and $w$. If $W=2$, what is the probability that $X\leq 2$?\\
+
+\item What is the probability that $W$ is greater than its expected value? Do {\em not} use an online applet to find this probability; calculate by hand.\\
+
+\item Show that the conditional distribution of $W$ given $X=2$ is Gamma distributed with parameters ($\alpha=3,\ \lambda=4$). [Recall that $\Gamma(\alpha) = (\alpha-1)!$, and use the fact that $f_X(2) = 1/8$.]\\
+\end{enumerate}
+
+
+
+% Question 5:
+%===================================================
+
+\item Let $X$ be the amount of time that a student spends walking from the Earth Sciences Building to the Mathematics Building, and let $Y$ be the amount of time that a student spends walking from the Earth Sciences Building to the Pharmaceutical Sciences Building. Suppose that the joint density of $X$ and $Y$ is given by the following function
+\[
+f_{X,Y}(x,y) = \left\{
+\begin{array}{ll}
+\frac {kx}y & \mbox{ if } 0 < x < y < 10 \\
+0 & \mbox{ otherwise} 
+\end{array}
+\right.
+\]
+for some fixed constant $k$. 
+\begin{enumerate}
+	\item What value of $k$ makes $f_{X,Y}(x,y)$ an honest probability density function?\\
+
+	\item Find the marginal probability density function for $X$. [Don't forget to specify the support of the function!]\\
+
+	\item Find the probability $\pr(Y + X \leq 10)$.
+
+
+\end{enumerate}
+
+\end{enumerate}
+\end{document}
