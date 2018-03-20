@@ -47,18 +47,6 @@
 Due: 2pm on Tuesday March 27, 2018}
 \end{center}
 
-\vspace*{2mm}
-\begin{itemize}
-  \item
-  Please remember to \textbf{include a cover sheet} when you submit your assignment. Please hand in your assignment in the STAT 302 assignment box on the ground floor of the Earth Sciences Building (ESB) by the due time.
-  \item
-  When answering the questions, writing down the final answer will not
-  be sufficient to receive full marks. Please show all calculations
-  unless otherwise specified.
-  Also define any events and notation that you use in your solutions.
-\end{itemize}
-
-
 \begin{enumerate}[label=\textbf{Question \arabic*:},start=1]
 
 %Question 1:
@@ -68,50 +56,51 @@ Due: 2pm on Tuesday March 27, 2018}
 We are studying a collection of molluscs living on a large beach in northern BC. The molluscs live near the high-tide line and it is known that their location is uniformly distributed with minimum -1 and maximum +2 metres from this line. Their daily energy intake (in kilocalories) turns out to be 1 plus 25\% of their squared location.
 \begin{enumerate}
 	\item What is the cumulative distribution function of the daily energy intake?\\
-	
+
 	Let X denote the location of the molluscs. $X \sim U(-1, 2)$ \\
 	Let Y denote the daily energy intake, $Y = 1 + 25\% X^2$\\
-	$f(x) = \begin{cases}
+	$$f(x) = \begin{cases}
 		1/3, & x \in [-1, 2]\\
 		0, & otherwise\\
-		\end{cases}$\\
-	$Pr(X \leq x) = F(x) = \begin{cases}
+		\end{cases}$$\\
+	$$Pr(X \leq x) = F(x) = \begin{cases}
 		0, & x < -1 \\
 		\frac{x + 1}{3}, & x \in [-1, 2]\\
 		1, & x > 2\\
-		\end{cases}$\\
-		
+		\end{cases}$$\\
+
 	$Pr(Y \leq y) = Pr(1 + 0.25 X^2 \leq y) = Pr(X^2 \leq 4(y-1)) = Pr(X \geq -2\sqrt{y-1}, X \leq 2\sqrt{y-1})$ \\
 	
 	Compute the domain of y:\\
-	$ -1 \leq -2\sqrt{y-1} \leq 0 \implies 1 \leq y \leq \frac{5}{4} $ \\
-	$ 0 \leq 2 \sqrt{y-1} \leq 2  \implies 1 \leq y \leq 2$ \\
+	$$ -1 \leq -2\sqrt{y-1} \leq 0 \implies 1 \leq y \leq \frac{5}{4} $$ \\
+	$$ 0 \leq 2 \sqrt{y-1} \leq 2  \implies 1 \leq y \leq 2$$ \\
 	\\
 	Therefore, when $1 \leq y \leq \frac{5}{4}, F(y) = \frac{2\sqrt{y-1}+1}{3} - \frac{-2\sqrt{y-1}+1}{3} = \frac{4\sqrt{y-1}}{3}$ \\
 	So the cumulative distribution function of daily energy intake is:\\
-	$F(y) = \begin{cases}
+	$$F(y) = \begin{cases}
 		0, & y < 1 \\
 		\frac{4 \sqrt{y-1}}{3}, & 1 \leq y \le \frac{5}{4} \\
 		\frac{ 2\sqrt{y-1} + 1}{3}, & \frac{5}{4} \le y \leq 2\\
 		1, & y > 2 \\
-		\end{cases}$\\
+		\end{cases}$$\\
 	
 	\item What is the probability density function of the daily energy intake?\\
-	
-	$f(y) = F'(y) = \begin{cases}
+	$(\frac{ 2\sqrt{y-1} + 1}{3})' = \frac{2}{3} \cdot \frac{1}{2} \frac{1}{\sqrt{y-1}}= \frac{1}{ 3\sqrt{y-1}}, 1 \leq y \le \frac{5}{4}$ \\
+	$(\frac{4 \sqrt{y-1}}{3})' = \frac{4}{3} \cdot \frac{1}{2} \frac{1}{\sqrt{y-1}} = \frac{2}{3 \sqrt{y-1}}, \frac{5}{4} \le y \leq 2$ \\
+	$$f(y) = F'(y) = \begin{cases}
 		0, & y < 1\ or\ y > 2\\
 		\frac{2}{3 \sqrt{y-1}}, & 1 \leq y \le \frac{5}{4} \\
 		\frac{1}{ 3\sqrt{y-1}}, & \frac{5}{4} \le y \leq 2\\
-		\end{cases}$\\
+		\end{cases}$$\\
 
 	\item What is the expected daily energy intake?\\
-	
-	$\mathbb{E}(Y) = \int_{-\infty}^{\infty} y f(y) dy = \int_{1}^{5/4} \frac{2y}{3\sqrt{y-1}} dy+ \int_{5/4}^{2} \frac{y}{3\sqrt{y-1}} dy$\\
-	$\mathbb{E}(Y) = \int_{1}^{5/4} \frac{2}{3} \sqrt{y-1}dy + \int_{1}^{5/4} \frac{2}{3\sqrt{y-1}}dy + \int_{5/4}^{2} \frac{1}{3} \sqrt{y-1}dy + \int_{5/4}^{2} \frac{1}{3\sqrt{y-1}} dy$ \\
-	$\mathbb{E}(Y) = \frac{4}{9} (y-1)^{3/2} |_{1}^{5/4} + \frac{4}{3} \sqrt{y-1} |_{1}^{5/4} + \frac{2}{9} (y-1)^{3/2} |_{5/4}^{2} + \frac{2}{3} \sqrt{y-1} |_{5/4}^{2} $ \\
-	$\mathbb{E}(Y) = \frac{4}{9} \times \frac{1}{8} + \frac{4}{3} \times \frac{1}{2} + \frac{2}{9} \times \frac{7}{8}  + \frac{2}{3} \times \frac{1}{2}$ \\
-	
-	$\mathbb{E}(Y) = \frac{5}{4}$
+	\begin{align*}
+	\mathbb{E}(Y) & = \int_{-\infty}^{\infty} y f(y) dy = \int_{1}^{5/4} \frac{2y}{3\sqrt{y-1}} dy+ \int_{5/4}^{2} \frac{y}{3\sqrt{y-1}} dy\\
+	 & = \int_{1}^{5/4} \frac{2}{3} \sqrt{y-1}dy + \int_{1}^{5/4} \frac{2}{3\sqrt{y-1}}dy + \int_{5/4}^{2} \frac{1}{3} \sqrt{y-1}dy + \int_{5/4}^{2} \frac{1}{3\sqrt{y-1}} dy \\
+	 & = \frac{4}{9} (y-1)^{3/2} |_{1}^{5/4} + \frac{4}{3} \sqrt{y-1} |_{1}^{5/4} + \frac{2}{9} (y-1)^{3/2} |_{5/4}^{2} + \frac{2}{3} \sqrt{y-1} |_{5/4}^{2}  \\
+	 & = \frac{4}{9} \times \frac{1}{8} + \frac{4}{3} \times \frac{1}{2} + \frac{2}{9} \times \frac{7}{8}  + \frac{2}{3} \times \frac{1}{2} \\
+	 &= \frac{5}{4}
+	\end{align*}
 	
 \end{enumerate}
 
