@@ -250,18 +250,20 @@ J = \text{det}
   
   Therefore, we have found $a(u) = \frac{1}{2\sqrt{\pi}} e^{-\frac{u^2}{4}} $, and $b(v) = \frac{1}{2\sqrt{\pi}} e^{-\frac{v^2}{4}} $\\
   So the density separates over variables.\\
-  
+ 
 
   \item Let $X_1,\ldots,X_n$ be a random sample from a normal distribution with mean $\mu$ and variance $\sigma^2$. If $n=2$, show that the sample mean, $\widebar{X}$, and the sample variance, $S_X^2$, are independent random variables. [Hint: first write $\widebar{X}$ and $S_X^2$ in terms of $U$ and $V$ as above, remembering that $U$ and $V$ are linear combinations of {\em standard} normal random variables.]\\
   
-  The sample mean $\widebar{X} = \frac{X_1 + X_2}{2} = U $, $\widebar{X} \sim N(\mu, \sigma^2 / 2)$.\\
-  The sample variance $S_X^2 = \frac{1}{2-1} ((X_1 - \widebar{X})^2 + (X_2 - \widebar{X})^2) = \frac{(X_1-X_2)^2}{2} = 2 V^2, S_X^2/\sigma^2 \sim \chi^2(1)$\\
+  Standarize $X_1$ and $X_2$: $X_1' = \frac{X_1 - \mu}{\sigma}$, $X_2' = \frac{X_2 - \mu}{\sigma}$ \\
+  Take the definition in (c), $U = X_1' + X_2', V = X_1' - X_2'$\\
+  The sample mean $$\widebar{X} = \frac{X_1 + X_2}{2} = \frac{(\sigma X_1' + \mu) + (\sigma X_2' + \mu)}{2} = \frac{\sigma}{2}U + \mu = f(u)$$ \\
+
+  The sample variance $$S_X^2 = \frac{1}{2-1} ((X_1 - \widebar{X})^2 + (X_2 - \widebar{X})^2) = \frac{(X_1-X_2)^2}{2} = \frac{(\sigma X_1' + \mu - \sigma X_2' - \mu)^2}{2} = \frac{\sigma^2 V^2}{2} = g(v)$$\\
   
   In question (c) we have proved that $f_{u,v}(u,v) = a(u) \cdot b(v)$, which means U and V are independent random variables.
-  
-  The sample mean $\widebar{X} = U$ is only related to U.\\
-  The sample variance $S_X^2 = 2 V^2$ is only related to V.\\
-  Since U and V are independent, $\widebar{X}$ and $S_X^2$ are independent too.
+  $f_{u,v}(f(u),g(v)) = a(f(u)) \cdot b(g(v))$\\
+  $$f(\widebar{X},S_X^2) = f_{u,v}(\frac{\sigma}{2}U + \mu, \frac{\sigma^2 V^2}{2}) = a(f(u)) \cdot b(g(v))$$\\
+  Therefore, $\widebar{X}$ and $S_X^2$ are independent of each other.
   
 \end{enumerate}
 
