@@ -61,17 +61,20 @@ Let $Y$ denote the number of bacteria per cubic centimeter in a particular liqui
 	
 	Since $Y|\Lambda \sim Poisson(\Lambda)$, the expected number of bacteria $\e{(Y|\Lambda = \lambda)} = \lambda$.\\
 	Since $\Lambda \sim Gamma(\alpha, \beta)$, the expected value $\e{(\Lambda)} = \frac{\alpha}{\beta}$ \\
-	Therefore, $\e(Y) = \e_{\Lambda}[\e_{Y|\Lambda}(Y|\Lambda)] = \e_{\Lambda}(\lambda) = \frac{\alpha}{\beta}$\\
-	The expected number of bacteria per cubic centimeter is $\frac{\alpha}{\beta}$.\\
+	By double expectation formula, the expected number of bacteria per cubic centimeter \\
+	$\e(Y) = \e_{\Lambda}[\e_{Y|\Lambda}(Y|\Lambda)] = \e_{\Lambda}(\lambda) = \frac{\alpha}{\beta}$\\
 
 	\item What is the standard deviation of the number of bacteria per cubic centimeter?\\
+	
+	$Y|\Lambda \sim Poisson(\Lambda), so \ \e(Y|\Lambda) = \lambda, \var(Y|\Lambda) = \lambda.$ \\
+	$\Lambda \sim Gamma(\alpha, \beta), so \ \e_{\Lambda}(\Lambda) = \frac{\alpha}{\beta}, \var_{\Lambda}(\Lambda) = \frac{\alpha}{\beta^2}.$
 	\begin{align*}
 	\var(Y) & = \e_{\Lambda}[\var(Y|\Lambda)] + \var_{\Lambda}[\e(Y|\Lambda)] \\
 	& = \e_{\Lambda}[\lambda] + \var_{\Lambda}[\lambda] \\
 	& = \frac{\alpha}{\beta} + \frac{\alpha}{\beta^2} \\
 	& = \frac{\alpha \beta + \alpha}{\beta^2}
 	\end{align*}
-	Therefore, the standard deviation of the number of bacteria per cubic centimeter $\sd(Y) = \sqrt{\var(Y)} = \sqrt{\frac{\alpha \beta + \alpha}{\beta^2}} = \frac{\sqrt{\alpha \beta + \alpha}}{\beta}$.\\
+	Therefore, the standard deviation of the number of bacteria per cubic centimeter\\ $\sd(Y) = \sqrt{\var(Y)} = \sqrt{\frac{\alpha \beta + \alpha}{\beta^2}} = \frac{\sqrt{\alpha \beta + \alpha}}{\beta}$.\\
 
 	\item What is the probability that $Y\geq 1$?\\
 	
