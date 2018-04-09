@@ -59,13 +59,41 @@ Let $Y$ denote the number of bacteria per cubic centimeter in a particular liqui
 \begin{enumerate}
 	\item What is the expected number of bacteria per cubic centimeter?\\
 	
-	Since $Y \sim Poisson(\lambda)$, the expected number of bacteria $\e{(Y)} = \lambda$.\\
-	Since $\lambda \sim Gamma(\alpha, \beta)$, the expected value $\e{(\lambda)} = \frac{\alpha}{\beta}$
-	
+	Since $Y|\Lambda \sim Poisson(\Lambda)$, the expected number of bacteria $\e{(Y|\Lambda = \lambda)} = \lambda$.\\
+	Since $\Lambda \sim Gamma(\alpha, \beta)$, the expected value $\e{(\Lambda)} = \frac{\alpha}{\beta}$ \\
+	Therefore, $\e(Y) = \e_{\Lambda}[\e_{Y|\Lambda}(Y|\Lambda)] = \e_{\Lambda}(\lambda) = \frac{\alpha}{\beta}$\\
+	The expected number of bacteria per cubic centimeter is $\frac{\alpha}{\beta}$.\\
 
 	\item What is the standard deviation of the number of bacteria per cubic centimeter?\\
+	\begin{align*}
+	\var(Y) & = \e_{\Lambda}[\var(Y|\Lambda)] + \var_{\Lambda}[\e(Y|\Lambda)] \\
+	& = \e_{\Lambda}[\lambda] + \var_{\Lambda}[\lambda] \\
+	& = \frac{\alpha}{\beta} + \frac{\alpha}{\beta^2} \\
+	& = \frac{\alpha \beta + \alpha}{\beta^2}
+	\end{align*}
+	Therefore, the standard deviation of the number of bacteria per cubic centimeter $\sd(Y) = \sqrt{\var(Y)} = \sqrt{\frac{\alpha \beta + \alpha}{\beta^2}} = \frac{\sqrt{\alpha \beta + \alpha}}{\beta}$.\\
 
 	\item What is the probability that $Y\geq 1$?\\
+	
+	The joint probability density function
+	\begin{align*}
+	f(y,\lambda) & = f_{Y|\Lambda}(y|\lambda) \cdot f_{\Lambda}(\lambda) \\
+	& = \frac{\lambda^y e^{-\lambda}}{y!} \cdot \frac{\beta e^{-\beta \lambda} (\beta \lambda)^{\alpha-1}}{\Gamma(\alpha)} \\
+	& = e^{-\lambda} \frac{\beta e^{-\beta \lambda} (\beta \lambda)^{\alpha-1}}{\Gamma(\alpha)}
+	\end{align*}
+	\begin{align*}
+	Pr(Y=0) & = \int_0^{\infty} e^{-\lambda} \frac{\beta e^{-\beta \lambda} (\beta \lambda)^{\alpha-1}}{\Gamma(\alpha)} d\lambda \\
+	& = \frac{\beta^\alpha}{\Gamma(\alpha)} \int_0^{\infty} e^{-\lambda(1+\beta)} \lambda^{\alpha-1} d \lambda \\
+	& = \frac{\beta^\alpha}{\Gamma(\alpha)} \int_0^{\infty} e^{-y} (\frac{y}{1+\beta})^{\alpha-1} \frac{1}{1+\beta} dy \\
+	& = (\frac{\beta}{1+\beta})^\alpha \frac{1}{\Gamma(\alpha)} \int_0^{\infty} e^{-y} y^{\alpha-1} dy \\
+	& = (\frac{\beta}{1+\beta})^\alpha \frac{1}{\Gamma(\alpha)} \Gamma(\alpha) \\
+	& = (\frac{\beta}{1+\beta})^\alpha
+	\end{align*}
+	
+	Therefore, the probability that $Pr(Y \geq 1)$ is
+	\[
+	Pr(Y \geq 1) = 1 - Pr(Y=0) = 1 - (\frac{\beta}{1+\beta})^\alpha
+	\]
 
 \end{enumerate}
 
@@ -104,19 +132,15 @@ f(x_1,x_2) =
 	& \e(X_1^2) = \int_0^1 3 x_1^2 (x_1 - 1)^2 d x_1 = 3 \int_0^1 x_1^4 - 2x_1^3 + x_1^2 dx_1 =  3 (\frac{1}{5}x_1^5 - \frac{1}{2}x_1^4 + \frac{1}{3} x_1^3)_0^1 =  \frac{1}{10} \\
 	& \var(X_1) = \e(X_1^2) - [\e(X_1)]^2  = \frac{1}{10} - (\frac{1}{4})^2 = \frac{3}{80} \\
 	& \e(X_2^2) = \int_0^1 6 x_2^2 (x_2 - x_2^2) dx_2 = 6 (\frac{1}{4} x_2^4 - \frac{1}{5} x_2^5)_0^1 = \frac{3}{10} \\
-	& \var(X_2) = \e(X_2^2) - [\e(X_2)]^2 =  \frac{3}{10} - (\frac{1}{2})^2 = \frac{1}{20} 
-	\end{align*}
-	\begin{align*}
-	\var(3X_1 - X_2) & = \var(3X_1) + \var(-X_2) + 2 Cov(3X_1, -X_2) \\
+	& \var(X_2) = \e(X_2^2) - [\e(X_2)]^2 =  \frac{3}{10} - (\frac{1}{2})^2 = \frac{1}{20} \\
+	& \var(3X_1 - X_2) \\
+	& = \var(3X_1) + \var(-X_2) + 2 Cov(3X_1, -X_2) \\
 	& = 9 \var(X_1) + \var(X_2) - 6Cov(X_1, X-2) \\
 	& = 9 \times \frac{3}{80} + \frac{1}{20} - 6 \times \frac{1}{40} \\
 	& = \frac{19}{80}
 	\end{align*}
 
 \end{enumerate}
-
-
-
 
 
 %Question 3:
@@ -127,10 +151,49 @@ Recent Statistics Canada data indicate that among Canadians who do not develop d
 
 \begin{enumerate}
   \item Find a bound on the probability that this person will live to be more than 100 years old.\\
+  
+  Let F denote the life expectancy of a female Canadian.\\
+  Let M denote the life expectancy of a male Canadian. \\
+  We can safely assume M and F are independent random variables. \\
+  Let X denote the life expectancy of a Canadian.X = 50.4\% F + 49.6\% M = 0.504F + 0.496M. \\
+  $\e(X) = \e(0.504F) + \e(0.496M) = 0.504 \times 85.5 + 0.496 \times 81.0 = 83.268 $\\
+  According to Markov's Inequality, $Pr(X \geq 100) \leq \frac{\e(X)}{100} = \frac{83.268}{100} = 0.83268$.\\
+  Therefore, the probability of this person to live more than 100 years is less than or equal to 83.268\% \\
 
   \item Statistics Canada also reports that the standard deviation of life expectancy in individuals who do not develop diabetes or hypertension is about 7 years for women, and about 8 years for men. Using this new information, find a better bound on the probability that our randomly selected individual will live to be more than 100 years old.\\
+  \begin{align*}
+  \var(X) & = \var(0.504F + 0.496M) \\
+  & = 0.504^2 \var(F) + 0.496^2 \var(M) \\
+  & = 0.504^2 \times 7^2 + 0.496^2 \times 8^2 \\
+  & = 28.191808
+  \end{align*}
+  Therefore, $\mu = 83.268, \sigma^2 = 28.191808, k = 100 - 83.268 = 16.732$\\
+  According to Chebyshev's Inequality:
+  \begin{align*}
+  & Pr(|X-\mu| \geq k) \leq \frac{\sigma^2}{k^2} \\ 
+  & Pr(|X - 83.268| \geq 16.732) \leq \frac{28.191808}{16.732^2} \\
+  & Pr(X \geq 100) \leq Pr(X \leq 66.536\ or\ X \geq 100) \leq 0.1007
+  \end{align*}
+  Therefore, the probability of the randomly selected individual to live more than 100 years is less than or equal to 10.07\%.\\
 
   \item Now suppose we select 50 men at random who have a negligible chance of developing diabetes or hypertension. What is the chance that their average life expectancy will be less than 80 years? How does this compare to the chance of the same event if we were to select 50 healthy women instead? \\
+  
+  Let $M_1, M_2, ... $ be a sequence of independent and identically distributed random variables, each having $\e(M_i) = \mu_M = 81.0$, and $\var(M_i) = \sigma_M^2 = 8^2$. According to Central Limit Theorem,
+  \begin{align*}
+  & Z_{n} = \frac{\sqrt{n}(\bar{X}_n - \mu_M)}{\sigma_M} \\
+  & z = \frac{\sqrt{n}(80 - \mu_M)}{\sigma_M} = \frac{\sqrt{50} (80 - 81.0)}{8} = - \frac{5\sqrt{2}}{8} = -0.8839 \\
+  & Pr(Z_n \leq z) = Pr(Z_n \leq -0.8839) = 0.1884
+  \end{align*}
+  Therefore, the probability of these sample men's average life expectancy to be less than 80 years is 0.1884.\\
+  
+  Let $F_1, F_2, ...$ be a sequence of independent and identically distributed random variables, each having $\e(F_i) = \mu_F = 85.5$, and $\var(F_i) = \sigma_F^2 = 7^2$. According to Central Limit Theorem,
+  \begin{align*}
+   & Z_{n} = \frac{\sqrt{n}(\bar{X}_n - \mu_F)}{\sigma_F} \\
+  & z = \frac{\sqrt{n}(80 - \mu_F)}{\sigma_F} = \frac{\sqrt{50} (80 - 85.5)}{7} = - \frac{55\sqrt{2}}{14} = -5.55584 \\
+  & Pr(Z_n \leq z) = Pr(Z_n \leq -5.55584) \approx 0
+  \end{align*}
+  
+  Therefore, the probability of these sample women average life expectancy to be less than 80 years is almost 0.\\
 
 \end{enumerate}
 
